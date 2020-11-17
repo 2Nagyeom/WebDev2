@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIV Moving Control</title>
+    <style>
+     div {
+         border: 1px solid palevioletred;
+         width: 100px; /*가로크기*/
+         height: 100px; /*세로크기*/ 
+         text-align: center;
+         line-height: 100px;
+         left: 300px; /*x 좌표*/
+         top: 300px; /*y 좌표*/
+         position: absolute;
+     }
+    </style>
+    <script>
+        //=============================================================================
+        //버튼 이벤트 핸들러정의
+        //-----------------------------------------------------------------------------
+        function moveLeft(){
+            let div = document.querySelector("div");
+            let currentLeft = parseInt(getComputedStyle(div).getPropertyValue("left"));
+            currentLeft -= 10;
+            div.style.left = currentLeft + 
+            
+            alert("left:[" + getComputedStyle(div).getPropertyValue("left") + "]");
+        }
+        //=============================================================================
+        //=============================================================================
+        window.onload = function(){
+            document.getElementById("moveLeft").addEventListener("Click", moveLeft);
+        }
+        //=============================================================================
+    </script>
+</head>
+<body>
+    <h1>DIV Moving Control</h1>
+    <hr>
+    <div>Javascript</div>
+    <button id="moveLeft">Left</button>
+    <button id="moveRight">Right</button>
+</body>
+</html>
+
+
+
+--->
