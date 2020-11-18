@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIV Moving Control</title>
+    <style>
+     div {
+         border: 1px solid palevioletred;
+         width: 100px; /*가로크기*/
+         height: 100px; /*세로크기*/ 
+         text-align: center;
+         line-height: 100px;
+         left: 300px; /*x 좌표*/
+         top: 300px; /*y 좌표*/
+         position: absolute;
+     }
+    </style>
+    <script>
+        //=============================================================================
+        //버튼 이벤트 핸들러정의
+        //-----------------------------------------------------------------------------
+        
+        //바뀐부분=====================================================
+        function moveLeft(){
+            let div = document.querySelector("div");
+            div.style.left = (parseInt(div.style.left) - 10) + "px";
+            div.innerHTML = div.style.left + "," + div.style.top;
+        }
+        //===========================================================
+        function moveRight(){
+            let div = document.querySelector("div");
+            let currentLeft = parseInt(getComputedStyle(div).getPropertyValue("left"));
+            currentLeft += 10;
+            div.style.left = currentLeft + "px"; 
+            div.innerHTML = getComputedStyle(div).getPropertyValue("left") + "," + getComputedStyle(div).getPropertyValue("top");
+        }
+        function moveUp(){
+            let div = document.querySelector("div");
+            let currentTop = parseInt(getComputedStyle(div).getPropertyValue("top"));
+            currentTop -= 10;
+            div.style.top = currentTop + "px"; 
+            div.innerHTML = getComputedStyle(div).getPropertyValue("left") + "," + getComputedStyle(div).getPropertyValue("top");
+        }
+        function moveDown(){
+            let div = document.querySelector("div");
+            let currentTop = parseInt(getComputedStyle(div).getPropertyValue("top"));
+            currentTop += 10;
+            div.style.top = currentTop + "px"; 
+            div.innerHTML = getComputedStyle(div).getPropertyValue("left") + "," + getComputedStyle(div).getPropertyValue("top");
+        }
+        //=============================================================================
+        //=============================================================================
+        window.onload = function(){
+            //스타일 속성 편한게 하기 위한 처리
+            let div = document.querySelector('div');
+            div.style.left = "300px";
+            div.style.top = "300px";
+            document.getElementById("moveLeft").addEventListener("click", moveLeft);
+            document.getElementById("moveRight").addEventListener("click", moveRight);
+            document.getElementById("moveUp").addEventListener("click", moveUp);
+            document.getElementById("moveDown").addEventListener("click", moveDown);
+        }
+        //=============================================================================
+    </script>
+</head>
+<body>
+    <h1>DIV Moving Control</h1>
+    <hr>
+    <div>Javascript</div>
+    <button id="moveLeft">Left</button>
+    <button id="moveRight">Right</button>
+    <button id="moveUp">Up</button>
+    <button id="moveDown">Down</button>
+</body>
+</html>
