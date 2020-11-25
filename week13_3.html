@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Study</title>
+    <script src="jquery-3.5.1.min.js"></script>
+    <script>
+    function buttonClick() {
+        $("p").hide();
+    }
+        $(document).ready(function(){
+            $("#hideP").click(function(){
+                //$("p").hide(1000);
+                //$("p").fadeOut(1000);
+                $("p").slideUp(1500);
+            });
+            $("#showP").click(function(){
+               //$("p").show(1000);
+               //$("p").fadeIn(1000);
+               $("p").slideDown(1500);
+           });
+        //hide, show 는 매개변수를 넣을 수 있음(숫자로 시간표현)
+        //------------------------------------------------------------------
+            $("#toggleP").click(function(){
+                //$("p").hide(1000);
+                $("p").fadeToggle(1000);
+            });        
+        //toggle 은 액션은 같지만 상황은 바뀌는것
+            $("p").click(function(){
+                $(this).hide();
+            });
+        //------------------------------------------------------------------
+        });  
+    </script>
+</head>
+<body>
+    <h1>jQuery Test</h1>
+    <button id="hideP">Hide</button>
+    <button id="showP">Show</button>
+    <button id="toggleP">Toggle</button> 
+    <hr>
+    <p>This is a paragraph.</p>
+    <p>This is another paragraph.</p>
+</body>
+</html>
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Input Control</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            border: 1px solid gray;
+            width: 200px;
+            padding: 5px;
+        }
+        th {
+            background-color: lightsalmon;
+        }
+        Input {
+            padding: 10px;
+            font-size: 12pt;
+        }
+    </style>
+    <script>
+        //==========================================================================================
+        //Event Handler Zone
+        //------------------------------------------------------------------------------------------
+        function insertRow() {
+             //input tag에 입력된 내용을 p태크에 출력한다.
+             let input = document.getElementById("textInput");
+                //입력된 내용 중에서 필요없는 앞뒤 여백을 먼저 제거한다.
+               input.value = input.value.trim(); 
+                //입력된 내용이 있으면 다음내용으로 넘어간다.
+                if(input.value.length <= 0)
+                  return; //입력된 내용 없으면 행을 추가하지 않는다.
+
+                let newWord = input.value;
+                input.value = "";
+
+
+            let rowIndex = this.parentNode.rowIndex - 1;
+            //--------------------------------------------------------------------------------------
+            //새로 추가할 행을 생성(위치)
+            let myTbody = document.getElementById("myTbody");
+            //새로 추가할 행을 생성
+            let newRow = myTbody.insertRow(rowIndex);
+            let cell1 = newRow.insertCell(0); //첫번째 셀을 만들고 0으로 만듦
+            let cell2 = newRow.insertCell(1);
+            //새로 만든 행에 두개의 새샐을 생성한다.
+            //새로 만든 셀에 필요한 내용을 저장한다.
+            cell1.innerHTML = newWord;
+            cell2.innerHTML = newWord.length;
+            //각 셀에 필요한 이벤트 핸들러를 등록한다.
+            cell1.addEventListener("click", insertRow);
+            cell2.addEventListener("click", killRow);
+        }
+
+
+        function keyDown() {
+            if(event.keyCode === 13){ //ENTER 키가 입력되었으면
+                //input tag에 입력된 내용을 p태크에 출력한다.
+                let input = document.getElementById("textInput");
+                //입력된 내용 중에서 필요없는 앞뒤 여백을 먼저 제거한다.
+               input.value = input.value.trim(); 
+                //입력된 내용이 있으면 다음내용으로 넘어간다.
+                if(input.value.length > 0){
+                //입력된 단어를 테이블의 새 행을 만드는 함수에 전달한다.
+                appendRow(input.value);
+                input.value = "";
+                }
+            }            
+        }
+        //==========================================================================================
+        //Function Zone
+        //------------------------------------------------------------------------------------------
+        function appendRow(newWord) { //이 함수의 기능은 table에 새 행을 만들고 매개변수로 받은 단어를 저장한다.
+            let myTbody = document.getElementById("myTbody");
+            //새로 추가할 행을 생성(위치)
+            let newRow = myTbody.insertRow(myTbody.rows.length);
+            let cell1 = newRow.insertCell(0); //첫번째 셀을 만들고 0으로 만듦
+            let cell2 = newRow.insertCell(1);
+            //새로 만든 행에 두개의 새샐을 생성한다.
+            //새로 만든 셀에 필요한 내용을 저장한다.
+            cell1.innerHTML = newWord;
+            cell2.innerHTML = newWord.length;
+            cell1.addEventListener("click", insertRow);
+            cell2.addEventListener("click", killRow);
+        }
+        //===========================================================================================
+        window.onload = function() {
+           document.getElementById("textInput").addEventListener("keydown", keyDown);
+            }
+        //===========================================================================================
+        
+        //===========================================================================================
+        //===========================================================================================
+    </script>
+</head>
+
+<body>
+    <h1>Text Input Control</h1>
+    <hr> Input: <input id="textInput" size=40 />
+    <hr>
+    <table>
+        <thead>
+            <th>단어</th>
+            <th>비고</th>
+        </thead>
+        <tbody id="myTbody">
+            
+        </tbody>
+    </table>
+</body>
+</html>
